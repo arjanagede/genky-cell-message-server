@@ -1,3 +1,4 @@
+const receiveChatService = require("../service/receiveChat");
 const transmitChatService = require("../service/transmitChat");
 
 const transmitChat = async (pReq, pRes) => {
@@ -10,4 +11,14 @@ const transmitChat = async (pReq, pRes) => {
   }
 };
 
-module.exports = { transmitChat };
+const receiveChat = async (pReq, pRes) => {
+  try {
+    const cResult = await receiveChatService();
+
+    pRes.send(cResult);
+  } catch (pErr) {
+    pRes.send(false);
+  }
+};
+
+module.exports = { transmitChat, receiveChat };
