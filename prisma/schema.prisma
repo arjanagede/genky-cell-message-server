@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ReceiveChat {
+  id           String @id @db.Char(20)
+  senderNumber String @db.VarChar(13)
+  message      String @db.Text
+  status       Int    @default(0) @db.Int
+  sendingTime  String @default("") @db.VarChar(11)
+
+  @@map("reciveChat")
+}
+
+model TransmitChat {
+  id                String @id @db.Char(20)
+  destinationNumber String @db.VarChar(13)
+  message           String @db.Text
+  status            Int    @default(0) @db.Int
+
+  @@map("transmitChat")
+}

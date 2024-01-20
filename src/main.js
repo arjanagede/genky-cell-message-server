@@ -1,5 +1,6 @@
 const express = require("express");
 const whatsappClient = require("./config/whatsapp");
+const router = require("./router");
 
 const cApp = express();
 const cPort = 3001;
@@ -18,7 +19,11 @@ cApp.use(
   })
 );
 
+cApp.use(express.raw());
+
 whatsappClient.initialize();
+
+cApp.use(router);
 
 cApp.use("/", (pReq, pRes) => {
   pRes.send("Hello from Genky Message Server!");
