@@ -1,4 +1,5 @@
-import express from "express";
+const express = require("express");
+const whatsappClient = require("./config/whatsapp");
 
 const cApp = express();
 const cPort = 3001;
@@ -16,6 +17,8 @@ cApp.use(
     limit: cLimit,
   })
 );
+
+whatsappClient.initialize();
 
 cApp.use("/", (pReq, pRes) => {
   pRes.send("Hello from Genky Message Server!");
